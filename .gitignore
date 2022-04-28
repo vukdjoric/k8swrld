@@ -1,0 +1,8 @@
+# General
+.DS_Store
+
+### VisualStudioCode ###
+.vscode/*
+
+# Local History for Visual Studio Code
+.history/

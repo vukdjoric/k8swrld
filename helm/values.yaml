@@ -1,0 +1,3 @@
+# set github-username
+
+appImage = "ghcr.io/<github-username>/k8simg:1.1"
