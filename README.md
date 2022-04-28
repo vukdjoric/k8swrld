@@ -109,14 +109,14 @@ Install or upgrade a release with one command:
 helm upgrade --install k8swrld ./helm
 ```
 
-## Removing EKS
+## Removing EKS cluster
 
-Uninstall a chart firsts to remove the load balancer:
+Uninstall the chart firsts to remove the load balancer which is added by the app:
 ```
 helm uninstall k8swrld
 ```
 
-Delete the cluster and worker nodes:
+Remove the cluster:
 ```
 eksctl delete cluster --name k8swrld
 ```
