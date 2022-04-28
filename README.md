@@ -69,7 +69,7 @@ Verify aws-load-balancer-controller installation:
 kubectl get deployment -n kube-system aws-load-balancer-controller
 ```
 
-You cluster should be ready by now. Some useful commands:
+Your cluster should be ready:
 ```
 kubectl get nodes
 kubectl get all -n k8swrld
@@ -119,6 +119,11 @@ helm uninstall k8swrld
 Remove the cluster:
 ```
 eksctl delete cluster --name k8swrld
+```
+
+Verify:
+```
+eksctl get cluster k8swrld
 ```
 
 # References
