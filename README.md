@@ -6,8 +6,7 @@ Internet facing Kubernetes app on AWS EKS.
 
 ### Prerequisites
 
-Make sure to have the following installed and configured:
-- AWS account
+Make sure to have following tools installed and configured:
 - Docker
 - kubectl - The Kubernetes command-line tool
 - aws - The AWS command-line interface (CLI)
@@ -22,7 +21,7 @@ Create a cluster using a config file:
 eksctl create cluster -f cluster.yaml
 ```
 
-Create an IAM OIDC identity provider for your cluster with the following command:
+Create an IAM OIDC identity provider for your cluster:
 ```
 eksctl utils associate-iam-oidc-provider --cluster k8swrld --approve
 ```
@@ -38,9 +37,9 @@ aws iam create-policy \
 rm iam_policy.json
 ```
 
-Create a Kubernetes service account named aws-load-balancer-controller in the kube-system namespace for the AWS Load Balancer Controller:
+Create a Kubernetes service account for the AWS Load Balancer Controller:
 ```
-# set aws-account-id
+# set <aws-account-id>
 
 eksctl create iamserviceaccount \
   --cluster=k8swrld \
@@ -79,23 +78,27 @@ kubectl get all -n kube-system
 
 ## Building docker image
 
-Set a new release version in index.html and match the value in the following commands.
+Set a new release in index.html and match the value in the following commands:
 
-Build docker image using:
+**1. Build docker image using:**
 
 ```
-# set github-username
+# set <github-username>
 
 docker build -t ghcr.io/<github-username>/k8simg:1.1 .
 ```
 
-Publish docker image using:
+**2. Publish to GitHub Packages repository:**
 ```
-# set github-username
+# set <github-username>
+
+echo $PAT | docker login ghcr.io --username <github-username> --password-stdin
+
+docker tag app ghcr.io/<github-username>/app:1.0.0
 
 docker push ghcr.io/<github-username>/k8simg:1.1
 ```
-Image that is pushed to the repository will be used for the rollout.
+Published image will be used for the rollout.
 
 ## Deploying application
 
@@ -120,3 +123,6 @@ eksctl delete cluster --name k8swrld
 
 # References
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+https://docs.aws.amazon.com/eks/latest/userguide/sample-deployment.html
+https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
