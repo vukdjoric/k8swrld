@@ -7,9 +7,9 @@ Internet facing Kubernetes app on AWS EKS.
 ### Prerequisites
 
 Make sure to have following tools installed and configured:
-- Docker
-- kubectl - The Kubernetes command-line tool
-- aws - The AWS command-line interface (CLI)
+- docker - The Docker command line
+- kubectl - The Kubernetes command line tool
+- aws - The AWS command line interface (CLI)
 - eksctl - The official CLI for Amazon EKS
 - helm - The package manager for Kubernetes
 
