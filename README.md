@@ -72,13 +72,12 @@ kubectl get deployment -n kube-system aws-load-balancer-controller
 Your cluster should be ready:
 ```
 kubectl get nodes
-kubectl get all -n k8swrld
 kubectl get all -n kube-system
 ```
 
 ## Building docker image
 
-Set a new release in index.html and match the value in the following commands:
+To release a new version increment the value in **index.html** and match it in the following commands:
 
 **1. Build docker image using:**
 
@@ -94,19 +93,27 @@ docker build -t ghcr.io/<github-username>/k8simg:1.1 .
 
 echo $PAT | docker login ghcr.io --username <github-username> --password-stdin
 
-docker tag app ghcr.io/<github-username>/app:1.0.0
-
 docker push ghcr.io/<github-username>/k8simg:1.1
 ```
 Published image will be used for the rollout.
 
 ## Deploying application
 
-Set a new release version in helm/values.yaml and match the value of "appVersion" in helm/Chart.yaml.
+Set the correct release number in **helm/values.yaml** and also for "appVersion" in **helm/Chart.yaml**.
 
 Install or upgrade a release with one command:
 ```
 helm upgrade --install k8swrld ./helm
+```
+
+Verify resources:
+```
+kubectl get all -n k8swrld-all
+```
+
+To get the public endpoint run:
+```
+kubectl get ingress -n k8swrld-all
 ```
 
 ## Removing EKS cluster

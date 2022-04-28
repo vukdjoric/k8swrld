@@ -10,3 +10,4 @@ nodeGroups:
     instanceType: t2.small
     desiredCapacity: 3
     volumeSize: 20
+availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c', 'us-east-1d']
